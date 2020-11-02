@@ -8,11 +8,32 @@ The Salesforce *springboot* rule is contained in a directory that is designed to
 It can be found, along with documentation, in this location:
 - [bazel-springboot-rule](tools/springboot): a Bazel extension to build and package Spring Boot applications
 
+### Did your build break on September 29, 2020?
+
+:fire: If you have a git repository rule bringing in this Spring Boot rule with *brach=master*, you broke on Sept 29, 2020 at around 3pm Pacific.
+I switched the repo to use *maven_install* style dependencies, instead of the obsolete *maven_jar*.
+I tagged the old code line as 1.0.2.
+To restore the old style, please use the following stanza in your WORKSPACE (to replace whatever you have there).
+
+```starlark
+git_repository(
+    name = "bazel_springboot_rule",
+    tag = "1.0.2",
+    remote = "https://github.com/salesforce/bazel-springboot-rule",
+    verbose = False,
+)
+```
+
+The 1.0.2 tag will not be maintained. 
+All new features will be added to *master* which is currently only *maven_install*.
+
 ### Support
 
 This rule was developed by Salesforce.
 If you have any issues with this repository, please create a [GitHub Issue](https://github.com/salesforce/bazel-springboot-rule/issues).
 We will try to quickly address problems and answer questions.
+
+:octocat: Please do us a huge favor. If you think this project could be useful for you, now or in the future, please hit the **Star** button at the top. That helps us advocate for more resources on this project. Thanks!
 
 ### Alternate Approach
 
